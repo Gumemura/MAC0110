@@ -5,6 +5,10 @@ nUSP: 9353592
 */
 
 #include <stdio.h>
+#include <string.h>
+
+#define FALSE 0
+#define TRUE 1
 
 char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 = ' ';
 
@@ -12,8 +16,8 @@ int tabuleiroVelha();
 
 int main(){
 
-	int coluna, linha;
-	char inputSouO = 's';
+	int coluna, linha = 0;
+	char inputSouO;
 
 	printf("Digita as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
 
@@ -22,7 +26,7 @@ int main(){
 			printf("Linha: ");
 			scanf("%d", &linha);
 			printf("\n");
-			if(linha <= 0 || linha >= 4){
+			if(linha <= 0 || linha >= 4){ //problema na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
 				printf("Inserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
 			}
 		}while(linha <= 0 || linha >= 4);
@@ -31,29 +35,39 @@ int main(){
 			printf("Coluna: ");
 			scanf("%d", &coluna);
 			printf("\n");
-			if(coluna <= 0 || coluna >= 4){
+			if(coluna <= 0 || coluna >= 4){ //problema na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
 				printf("Inserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
 			}
 		}while(coluna <= 0 || coluna >= 4);
 
-		do{
+		do{ //problema: ele executa um loop sem antes executar as etapas, mas o segundo loop é normal
 			printf("Letra: ");
-			scanf("%c", &inputSouO);
+			scanf("%c ", &inputSouO);
 			printf("\n");
-
-			//VOLTAR AQUI
-
-			if((inputSouO != 's' && inputSouO != 'S') && (inputSouO != 'o' && inputSouO != 'O')){
-				printf("Inserir a letra S ou O\n\n");
+			if(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O'){
+				printf("Inserir a letra S ou O (maiusculo ou minusculo)\n\n"); 
 			}
+		}while(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O');
 
-			//ATÉ AQUI
+		if(linha == 1){
+			if(coluna == 1)			{s1 = inputSouO;}
+			else if(coluna == 2)	{s2 = inputSouO;}
+			else if(coluna == 3)	{s3 = inputSouO;}
+		}
+		else if(linha == 2){
+			if(coluna == 1)			{s4 = inputSouO;}
+			else if(coluna == 2)	{s5 = inputSouO;}
+			else if(coluna == 3)	{s6 = inputSouO;} 
+		}
+		else if(linha == 3){
+			if(coluna == 1)			{s7 = inputSouO;}
+			else if(coluna == 2)	{s8 = inputSouO;}
+			else if(coluna == 3)	{s9 = inputSouO;}
+		}
 
-		}while((inputSouO != 's' && inputSouO != 'S') && (inputSouO != 'o' && inputSouO != 'O'));
-	}while(s1 != ' ' && s2 != ' ' && s3 != ' ' && s4 != ' ' && s5 != ' ' && s6 != ' ' && s7 != ' ' && s8 != ' ' && s9 != ' ');
+		tabuleiroVelha();
 
-
-	tabuleiroVelha();
+	}while(s1 != ' ' && s2 != ' ' && s3 != ' ' && s4 != ' ' && s5 != ' ' && s6 != ' ' && s7 != ' ' && s8 != ' ' && s9 != ' '); //problema: a condicao desse while n é verificada e o loop roda só uma vez
 }
 
 int tabuleiroVelha(){
