@@ -7,6 +7,7 @@ nUSP: 9353592
 /*
 TO DO LIST
 	-PROBLEMAS
+		- Rever textos!
 		- Problema.1: se for inputado uma letra numa var tipo int, loop infinito
 		- Problema.2: impedir que um valor seja subscrito
 
