@@ -9,7 +9,6 @@ TO DO LIST
 	-PROBLEMAS
 		- Rever textos!
 		- Problema.1: se for inputado uma letra numa var tipo int, loop infinito
-		- Problema.2: impedir que um valor seja subscrito
 
 	-UPGRADES
 		- Scanf da linha e coluna na mesma linha (pra agilizar o jogo)
@@ -18,6 +17,7 @@ TO DO LIST
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #define FALSE 0
 #define TRUE 1
@@ -29,9 +29,18 @@ int main(){
 
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	int coluna, linha;
+	int numAleatorio, letraAleatoria, pcJaJogou = FALSE;
 	char inputSouO;
 
-	printf("Digita as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
+	printf("\n\t#### JOGO DO S.O.S. ####\t\n\n");
+	printf("\tDigita as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
+	printf("\t\t\t    COLUNAS\n");
+	printf("\t\t\t   1   2   3\n");
+	printf("\t\t\t1  %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
+	printf("\t\t\t  ---+---+---\n");
+	printf("\t\tLINHAS\t2  %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
+	printf("\t\t\t  ---+---+---\n");
+	printf("\t\t\t3  %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
 
 	do{
 		do{
@@ -54,16 +63,19 @@ int main(){
 					if(coluna == 1 && full1 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 2 && full2 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 3 && full3 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+					else {podePedirLetra = TRUE;}
 				}
 				else if(linha == 2){
 					if(coluna == 1 && full4 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 2 && full5 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 3 && full6 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;} 
+					else if(coluna == 3 && full6 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+					else {podePedirLetra = TRUE;} 
 				}
 				else if(linha == 3){
 					if(coluna == 1 && full7 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 2 && full8 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 3 && full9 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+					else {podePedirLetra = TRUE;}
 				}
 			}
 		}while(coluna <= 0 || coluna >= 4);
@@ -94,10 +106,71 @@ int main(){
 				else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
 			}
 		}
+		
+		/*do{
+			numAleatorio = rand() % 9 + 1;
+			letraAleatoria = rand() % 1 + 0;
 
-		podePedirLetra = TRUE;
+			if(numAleatorio == 1 && full1 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full1 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 2 && full2 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full2 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 3 && full3 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full3 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 4 && full4 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full4 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 5 && full5 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full5 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 6 && full6 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full6 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 7 && full7 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full7 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 8 && full8 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full8 = TRUE;
+				pcJaJogou = TRUE;
+			}
+			else if(numAleatorio == 9 && full9 == FALSE){
+				if(letraAleatoria == 0){s1 = 's';}
+				if(letraAleatoria == 1){s1 = 'o';}
+				full9 = TRUE;
+				pcJaJogou = TRUE;
+			}
+		}while(pcJaJogou = FALSE);*/
 
 		tabuleiroVelha();
+
+		pcJaJogou = FALSE;
+		podePedirLetra = TRUE;
 
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
