@@ -34,7 +34,7 @@ int main(){
 	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1;
 	char inputSouO;
 
-	printf("\n\t#### JOGO DO S.O.S. ####\t\n\n");
+	printf("\n\t######### JOGO DO S.O.S. #########t\n\n");
 	printf("\tDigite as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
 	printf("\t\t      COLUNAS\n");
 	printf("\t\t     1   2   3\n\n");
