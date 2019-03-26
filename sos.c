@@ -31,20 +31,21 @@ int main(){
 
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	int coluna, linha;
-	int numAleatorio, letraAleatoria, pcJaJogou = FALSE;
+	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1;
 	char inputSouO;
 
 	printf("\n\t#### JOGO DO S.O.S. ####\t\n\n");
-	printf("\tDigita as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
-	printf("\t\t\t    COLUNAS\n");
-	printf("\t\t\t   1   2   3\n");
-	printf("\t\t\t1  %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
-	printf("\t\t\t  ---+---+---\n");
-	printf("\t\tLINHAS\t2  %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
-	printf("\t\t\t  ---+---+---\n");
-	printf("\t\t\t3  %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
+	printf("\tDigite as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
+	printf("\t\t      COLUNAS\n");
+	printf("\t\t     1   2   3\n\n");
+	printf("\t\t1    %d ",1 ); printf("|"); printf(" %d ",2); printf("|"); printf(" %d \n",3);
+	printf("\t\t    ---+---+---\n");
+	printf("\tLINHAS\t2    %d ",4); printf("|"); printf(" %d ",5); printf("|"); printf(" %d \n",6);
+	printf("\t\t    ---+---+---\n");
+	printf("\t\t3    %d ",7); printf("|"); printf(" %d ",8); printf("|"); printf(" %d \n\n\n",9);
 
 	do{
+		printf("\t########### RODADA #%d ###########\n\n", contadorRodadas);
 		do{
 			printf("Linha (1 a 3): ");
 			scanf("%d", &linha);
@@ -108,7 +109,10 @@ int main(){
 				else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
 			}
 
-			printf("Aguarde, estou pensando.......\n");
+			tabuleiroVelha();
+
+			printf("\nAgora e minha vez!");
+			printf("\nAguarde, estou pensando.......\n");
 
 			if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
 				do{
@@ -174,15 +178,24 @@ int main(){
 					}
 				}while(pcJaJogou == FALSE);
 
-				printf("\nPC: Casa a ser alterada: %d", numAleatorio);
-				printf("\nPC: Valor a ser inserido (0 = s | 1 = o): %d", letraAleatoria);
+				printf("\nJa sei! Vou alterar a casa de numero %d", numAleatorio);
+				printf("\nE vou colocar a seguinte letra ");
+				if(letraAleatoria == 0){
+					printf("s!");
+				}else{
+					printf("o!");
+				}
+				printf("\n");
 			}
 		}
 
 		tabuleiroVelha();
 
+		printf("\nSua vez!\n\n");
+
 		pcJaJogou = FALSE;
 		podePedirLetra = TRUE;
+		contadorRodadas++;
 
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
