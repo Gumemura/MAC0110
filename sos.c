@@ -8,7 +8,7 @@ nUSP: 9353592
 TO DO LIST
 	-PROBLEMAS
 		- Rever textos!
-		- Problema.1: se for inputado uma letra numa var tipo int, loop infinito
+		- PROBLEMA.1: se for inputado uma letra numa var tipo int, loop infinito
 
 	-UPGRADES
 		- Scanf da linha e coluna na mesma linha (pra agilizar o jogo)
@@ -30,10 +30,12 @@ int aleatorio(int, int);
 int main(){
 
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
+	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
 	int coluna, linha;
 	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1;
 	char inputSouO;
 
+	//Print inicial do tabuleiro, apenas para introduzi-lo ao jogador
 	printf("\n\t######### JOGO DO S.O.S. #########t\n\n");
 	printf("\tDigite as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
 	printf("\t\t      COLUNAS\n");
@@ -46,22 +48,26 @@ int main(){
 
 	do{
 		printf("\t########### RODADA #%d ###########\n\n", contadorRodadas);
+
+		//Aqui é pedido ao usuário que ele impute a linha
 		do{
 			printf("Linha (1 a 3): ");
 			scanf("%d", &linha);
 			printf("\n");
-			if(linha <= 0 || linha >= 4){ //Problema.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
+			if(linha <= 0 || linha >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
 				printf("Inserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
 			}
 		}while(linha <= 0 || linha >= 4);
 
+		//Aqui é pedido ao usuário que ele impute a coluna
 		do{
 			printf("Coluna (1 a 3): ");
 			scanf("%d", &coluna);
 			printf("\n");
-			if(coluna <= 0 || coluna >= 4){ //Problema.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
+			if(coluna <= 0 || coluna >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
 				printf("Inserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
 			}else{
+				//Nesse lógica é verificado se o campo no qual o suário quer inserir já tem um valor 
 				if(linha == 1){
 					if(coluna == 1 && full1 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 					else if(coluna == 2 && full2 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
@@ -83,6 +89,7 @@ int main(){
 			}
 		}while(coluna <= 0 || coluna >= 4);
 
+		//A variavevel 'podePedirLetra' representa o seguinte: o usuário ja imputou um valor valido para a linha e para a coluna. Assim, pode prosseguir para inserir a letra
 		if(podePedirLetra){
 			do{
 				printf("Letra ('s' ou 'o'): ");
@@ -93,6 +100,7 @@ int main(){
 				}
 			}while(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O');
 
+			//Nesse lógica é atribuido ao campo a letra imputada pelo usuario
 			if(linha == 1){
 				if(coluna == 1 && full1 == FALSE)		{s1 = inputSouO; full1 = TRUE;}
 				else if(coluna == 2 && full2 == FALSE)	{s2 = inputSouO; full2 = TRUE;}
@@ -114,6 +122,7 @@ int main(){
 			printf("\nAgora e minha vez!");
 			printf("\nAguarde, estou pensando.......\n");
 
+			//Nessa lógica é feita a jogada do computador
 			if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
 				do{
 					srand(time(NULL));
@@ -196,10 +205,10 @@ int main(){
 		pcJaJogou = FALSE;
 		podePedirLetra = TRUE;
 		contadorRodadas++;
-
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
 
+//Essa função printará o tabuleiro e retornará um valor de acordo com os valores dos campos
 int tabuleiroVelha(){
 	//Print da tabela
 	int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
@@ -224,7 +233,3 @@ int tabuleiroVelha(){
 
 	return(somaCasas);
 }
-
-
-
-
