@@ -32,7 +32,7 @@ int main(){
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
 	int coluna, linha;
-	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1;
+	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1, quemJogaPrimeiro;
 	char inputSouO;
 
 	//Print inicial do tabuleiro, apenas para introduzi-lo ao jogador
@@ -46,155 +46,169 @@ int main(){
 	printf("\t\t    ---+---+---\n");
 	printf("\t\t3    %d ",7); printf("|"); printf(" %d ",8); printf("|"); printf(" %d \n\n\n",9);
 
+	printf("Quem voce quer que comece. Voce(0) ou o computador(1)?");
+	scanf("%d", &quemJogaPrimeiro);
+	printf("\n\n");
+
 	do{
 		printf("\t########### RODADA #%d ###########\n\n", contadorRodadas);
 
-		//Aqui é pedido ao usuário que ele impute a linha
-		do{
-			printf("Linha (1 a 3): ");
-			scanf("%d", &linha);
-			printf("\n");
-			if(linha <= 0 || linha >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
-				printf("Inserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
-			}
-		}while(linha <= 0 || linha >= 4);
+		if(quemJogaPrimeiro == 0){
+			//Aqui é pedido ao usuário que ele impute a linha
+			do{
+				printf("Linha (1 a 3): ");
+				scanf("%d", &linha);
+				printf("\n");
+				if(linha <= 0 || linha >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
+					printf("Inserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
+				}
+			}while(linha <= 0 || linha >= 4);
 
-		//Aqui é pedido ao usuário que ele impute a coluna
-		do{
-			printf("Coluna (1 a 3): ");
-			scanf("%d", &coluna);
-			printf("\n");
-			if(coluna <= 0 || coluna >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
-				printf("Inserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
-			}else{
-				//Nesse lógica é verificado se o campo no qual o suário quer inserir já tem um valor 
-				if(linha == 1){
-					if(coluna == 1 && full1 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 2 && full2 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 3 && full3 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else {podePedirLetra = TRUE;}
+			//Aqui é pedido ao usuário que ele impute a coluna
+			do{
+				printf("Coluna (1 a 3): ");
+				scanf("%d", &coluna);
+				printf("\n");
+				if(coluna <= 0 || coluna >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
+					printf("Inserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
+				}else{
+					//Nesse lógica é verificado se o campo no qual o suário quer inserir já tem um valor 
+					if(linha == 1){
+						if(coluna == 1 && full1 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full2 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full3 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else {podePedirLetra = TRUE;}
+					}
+					else if(linha == 2){
+						if(coluna == 1 && full4 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full5 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full6 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else {podePedirLetra = TRUE;} 
+					}
+					else if(linha == 3){
+						if(coluna == 1 && full7 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full8 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full9 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else {podePedirLetra = TRUE;}
+					}
 				}
-				else if(linha == 2){
-					if(coluna == 1 && full4 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 2 && full5 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 3 && full6 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else {podePedirLetra = TRUE;} 
-				}
-				else if(linha == 3){
-					if(coluna == 1 && full7 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 2 && full8 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else if(coluna == 3 && full9 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-					else {podePedirLetra = TRUE;}
-				}
-			}
-		}while(coluna <= 0 || coluna >= 4);
+			}while(coluna <= 0 || coluna >= 4);
+		}
+
+			
 
 		//A variavevel 'podePedirLetra' representa o seguinte: o usuário ja imputou um valor valido para a linha e para a coluna. Assim, pode prosseguir para inserir a letra
 		if(podePedirLetra){
-			do{
-				printf("Letra ('s' ou 'o'): ");
-				scanf(" %c", &inputSouO);
-				printf("\n");
-				if(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O'){
-					printf("Inserir a letra S ou O (maiusculo ou minusculo)\n\n"); 
-				}
-			}while(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O');
-
-			//Nesse lógica é atribuido ao campo a letra imputada pelo usuario
-			if(linha == 1){
-				if(coluna == 1 && full1 == FALSE)		{s1 = inputSouO; full1 = TRUE;}
-				else if(coluna == 2 && full2 == FALSE)	{s2 = inputSouO; full2 = TRUE;}
-				else if(coluna == 3 && full3 == FALSE)	{s3 = inputSouO; full3 = TRUE;}
-			}
-			else if(linha == 2){
-				if(coluna == 1 && full4 == FALSE)		{s4 = inputSouO; full4 = TRUE;}
-				else if(coluna == 2 && full5 == FALSE)	{s5 = inputSouO; full5 = TRUE;}
-				else if(coluna == 3 && full6 == FALSE)	{s6 = inputSouO; full6 = TRUE;} 
-			}
-			else if(linha == 3){
-				if(coluna == 1 && full7 == FALSE)		{s7 = inputSouO; full7 = TRUE;}
-				else if(coluna == 2 && full8 == FALSE)	{s8 = inputSouO; full8 = TRUE;}
-				else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
-			}
-
-			tabuleiroVelha();
-
-			printf("\nAgora e minha vez!");
-			printf("\nAguarde, estou pensando.......\n");
-
-			//Nessa lógica é feita a jogada do computador
-			if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
+			if(quemJogaPrimeiro == 0){
 				do{
-					srand(time(NULL));
-					numAleatorio = rand()%9 + 1;
+					printf("Letra ('s' ou 'o'): ");
+					scanf(" %c", &inputSouO);
+					printf("\n");
+					if(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O'){
+						printf("Inserir a letra S ou O (maiusculo ou minusculo)\n\n"); 
+					}
+				}while(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O');
 
-					srand(time(NULL));
-					letraAleatoria = rand()%2;
-
-					if(numAleatorio == 1 && full1 == FALSE){
-						if(letraAleatoria == 0){s1 = 's';}
-						if(letraAleatoria == 1){s1 = 'o';}
-						full1 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 2 && full2 == FALSE){
-						if(letraAleatoria == 0){s2 = 's';}
-						if(letraAleatoria == 1){s2 = 'o';}
-						full2 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 3 && full3 == FALSE){
-						if(letraAleatoria == 0){s3 = 's';}
-						if(letraAleatoria == 1){s3 = 'o';}
-						full3 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 4 && full4 == FALSE){
-						if(letraAleatoria == 0){s4 = 's';}
-						if(letraAleatoria == 1){s4 = 'o';}
-						full4 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 5 && full5 == FALSE){
-						if(letraAleatoria == 0){s5 = 's';}
-						if(letraAleatoria == 1){s5 = 'o';}
-						full5 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 6 && full6 == FALSE){
-						if(letraAleatoria == 0){s6 = 's';}
-						if(letraAleatoria == 1){s6 = 'o';}
-						full6 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 7 && full7 == FALSE){
-						if(letraAleatoria == 0){s7 = 's';}
-						if(letraAleatoria == 1){s7 = 'o';}
-						full7 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 8 && full8 == FALSE){
-						if(letraAleatoria == 0){s8 = 's';}
-						if(letraAleatoria == 1){s8 = 'o';}
-						full8 = TRUE;
-						pcJaJogou = TRUE;
-					}
-					else if(numAleatorio == 9 && full9 == FALSE){
-						if(letraAleatoria == 0){s9 = 's';}
-						if(letraAleatoria == 1){s9 = 'o';}
-						full9 = TRUE;
-						pcJaJogou = TRUE;
-					}
-				}while(pcJaJogou == FALSE);
-
-				printf("\nJa sei! Vou alterar a casa de numero %d", numAleatorio);
-				printf("\nE vou colocar a seguinte letra ");
-				if(letraAleatoria == 0){
-					printf("s!");
-				}else{
-					printf("o!");
+				//Nesse lógica é verificado se o campo ja tem um valor atribuido e, se não, atribui o valor da letra imputada pelo usuario ao respectivo campo
+				if(linha == 1){
+					if(coluna == 1 && full1 == FALSE)		{s1 = inputSouO; full1 = TRUE;}
+					else if(coluna == 2 && full2 == FALSE)	{s2 = inputSouO; full2 = TRUE;}
+					else if(coluna == 3 && full3 == FALSE)	{s3 = inputSouO; full3 = TRUE;}
 				}
-				printf("\n");
+				else if(linha == 2){
+					if(coluna == 1 && full4 == FALSE)		{s4 = inputSouO; full4 = TRUE;}
+					else if(coluna == 2 && full5 == FALSE)	{s5 = inputSouO; full5 = TRUE;}
+					else if(coluna == 3 && full6 == FALSE)	{s6 = inputSouO; full6 = TRUE;} 
+				}
+				else if(linha == 3){
+					if(coluna == 1 && full7 == FALSE)		{s7 = inputSouO; full7 = TRUE;}
+					else if(coluna == 2 && full8 == FALSE)	{s8 = inputSouO; full8 = TRUE;}
+					else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
+				}
+				tabuleiroVelha();
+
+				printf("\nAgora e minha vez!");
+				printf("\nAguarde, estou pensando.......\n");
+
+				quemJogaPrimeiro = 1;
+			}
+
+			else if(quemJogaPrimeiro == 1){
+				//Nessa lógica é feita a jogada do computador
+				if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
+					do{
+						srand(time(NULL));
+						numAleatorio = rand()%9 + 1;
+
+						srand(time(NULL));
+						letraAleatoria = rand()%2;
+
+						if(numAleatorio == 1 && full1 == FALSE){
+							if(letraAleatoria == 0){s1 = 's';}
+							if(letraAleatoria == 1){s1 = 'o';}
+							full1 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 2 && full2 == FALSE){
+							if(letraAleatoria == 0){s2 = 's';}
+							if(letraAleatoria == 1){s2 = 'o';}
+							full2 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 3 && full3 == FALSE){
+							if(letraAleatoria == 0){s3 = 's';}
+							if(letraAleatoria == 1){s3 = 'o';}
+							full3 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 4 && full4 == FALSE){
+							if(letraAleatoria == 0){s4 = 's';}
+							if(letraAleatoria == 1){s4 = 'o';}
+							full4 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 5 && full5 == FALSE){
+							if(letraAleatoria == 0){s5 = 's';}
+							if(letraAleatoria == 1){s5 = 'o';}
+							full5 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 6 && full6 == FALSE){
+							if(letraAleatoria == 0){s6 = 's';}
+							if(letraAleatoria == 1){s6 = 'o';}
+							full6 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 7 && full7 == FALSE){
+							if(letraAleatoria == 0){s7 = 's';}
+							if(letraAleatoria == 1){s7 = 'o';}
+							full7 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 8 && full8 == FALSE){
+							if(letraAleatoria == 0){s8 = 's';}
+							if(letraAleatoria == 1){s8 = 'o';}
+							full8 = TRUE;
+							pcJaJogou = TRUE;
+						}
+						else if(numAleatorio == 9 && full9 == FALSE){
+							if(letraAleatoria == 0){s9 = 's';}
+							if(letraAleatoria == 1){s9 = 'o';}
+							full9 = TRUE;
+							pcJaJogou = TRUE;
+						}
+					}while(pcJaJogou == FALSE);
+
+					printf("\nJa sei! Vou alterar a casa de numero %d", numAleatorio);
+					printf("\nE vou colocar a seguinte letra ");
+					if(letraAleatoria == 0){
+						printf("s!");
+					}else{
+						printf("o!");
+					}
+					printf("\n");
+				}
+				quemJogaPrimeiro = 0;
 			}
 		}
 
