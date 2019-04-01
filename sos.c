@@ -23,15 +23,18 @@ TO DO LIST
 #define FALSE 0
 #define TRUE 1
 
+void tabuleiroVelha();
 char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 = ' ';
-int tabuleiroVelha();
-//int contadorPontos();
+
+int contadorPontos();
+int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
+int somaCasas;
 
 int main(){
 
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
-	int coluna, linha;
+	int coluna, linha, somaCasas;
 	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1, quemJogaPrimeiro;
 	char inputSouO;
 
@@ -124,6 +127,7 @@ int main(){
 					else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
 				}
 				tabuleiroVelha();
+				contadorPontos();
 
 				printf("\n\n");
 
@@ -215,12 +219,17 @@ int main(){
 				}
 
 				tabuleiroVelha();
+				contadorPontos();
 
 				printf("\n\n");
 
 				quemJogaPrimeiro = 0;
 			}
 		}
+
+		somaCasas = contadorPontos();
+		printf("%d", somaCasas);
+		printf("\n\n");
 
 		pcJaJogou = FALSE;
 		podePedirLetra = TRUE;
@@ -229,19 +238,18 @@ int main(){
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
 
-//Essa função printará o tabuleiro e retornará um valor de acordo com os valores dos campos
-int tabuleiroVelha(){
-	//Print da tabela
-	int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
-	int somaCasas = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9;
-
+//Essa função printará o tabuleiro
+void tabuleiroVelha(){
 	printf("\n");
 	printf("\t\t\t %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
 	printf("\t\t\t---+---+---\n");
 	printf("\t\t\t %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
 	printf("\t\t\t---+---+---\n");
 	printf("\t\t\t %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
+}
 
+//Retorna um valor de acordo com os valores dos campos
+int contadorPontos(){
 	if(s1 == ' '){n1 = 0;} 		else if(s1 == 's'){n1 = 1;} 	else if(s1 == 'o'){n1 = 2;}
 	if(s2 == ' '){n2 = 0;} 		else if(s2 == 's'){n2 = 3;} 	else if(s2 == 'o'){n2 = 6;}
 	if(s3 == ' '){n3 = 0;} 		else if(s3 == 's'){n3 = 9;} 	else if(s3 == 'o'){n3 = 18;}
@@ -252,25 +260,7 @@ int tabuleiroVelha(){
 	if(s8 == ' '){n8 = 0;} 		else if(s8 == 's'){n8 = 2187;} 	else if(s8 == 'o'){n8 = 4374;}
 	if(s9 == ' '){n9 = 0;} 		else if(s9 == 's'){n9 = 6561;} 	else if(s9 == 'o'){n9 = 13122;}
 
-	return(somaCasas);
+	somaCasas = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9;
+
+	return somaCasas;
 }
-
-/*int contadorPontos(){
-	if(){
-
-	}else if(){
-
-	}else if(){
-		
-	}else if(){
-		
-	}else if(){
-		
-	}else if(){
-		
-	}else if(){
-		
-	}else if(){
-		
-	}
-}*/
