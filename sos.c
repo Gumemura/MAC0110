@@ -28,13 +28,13 @@ char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 
 
 int contadorPontos();
 int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
-int somaCasas;
+int pontosPC = 0, pontosJogador = 0;
 
 int main(){
 
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
-	int coluna, linha, somaCasas;
+	int coluna, linha;
 	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1, quemJogaPrimeiro;
 	char inputSouO;
 
@@ -55,6 +55,8 @@ int main(){
 
 	do{
 		printf("\t########### RODADA #%d ###########\n\n", contadorRodadas);
+		printf("\t########### PLACAR ##############\n");
+		printf("\tComputador: %d       Jogador: %d\n\n", pontosPC, pontosJogador);
 
 		if(quemJogaPrimeiro == 0){
 			//Aqui é pedido ao usuário que ele impute a linha
@@ -127,7 +129,7 @@ int main(){
 					else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
 				}
 				tabuleiroVelha();
-				contadorPontos();
+				contadorPontos(pontosJogador);
 
 				printf("\n\n");
 
@@ -219,17 +221,13 @@ int main(){
 				}
 
 				tabuleiroVelha();
-				contadorPontos();
+				contadorPontos(pontosPC);
 
 				printf("\n\n");
 
 				quemJogaPrimeiro = 0;
 			}
 		}
-
-		somaCasas = contadorPontos();
-		printf("%d", somaCasas);
-		printf("\n\n");
 
 		pcJaJogou = FALSE;
 		podePedirLetra = TRUE;
@@ -249,7 +247,10 @@ void tabuleiroVelha(){
 }
 
 //Retorna um valor de acordo com os valores dos campos
-int contadorPontos(){
+int contadorPontos(int pontos){
+
+	int verificadorS1 = 0;//, verificadorS2 = 0, verificadorS3 = 0, verificadorS4 = 0, verificadorS5 = 0, verificadorS6 = 0, verificadorS7 = 0, verificadorS8;
+
 	if(s1 == ' '){n1 = 0;} 		else if(s1 == 's'){n1 = 1;} 	else if(s1 == 'o'){n1 = 2;}
 	if(s2 == ' '){n2 = 0;} 		else if(s2 == 's'){n2 = 3;} 	else if(s2 == 'o'){n2 = 6;}
 	if(s3 == ' '){n3 = 0;} 		else if(s3 == 's'){n3 = 9;} 	else if(s3 == 'o'){n3 = 18;}
@@ -260,7 +261,12 @@ int contadorPontos(){
 	if(s8 == ' '){n8 = 0;} 		else if(s8 == 's'){n8 = 2187;} 	else if(s8 == 'o'){n8 = 4374;}
 	if(s9 == ' '){n9 = 0;} 		else if(s9 == 's'){n9 = 6561;} 	else if(s9 == 'o'){n9 = 13122;}
 
-	somaCasas = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9;
+	if((s1 + s2 + s3) == 16){
+		verificadorS1++;
+		if(verificadorS1 == 1){
+			pontos++;
+		}
+	}
 
-	return somaCasas;
+	return 0;
 }
