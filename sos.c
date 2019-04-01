@@ -25,7 +25,7 @@ TO DO LIST
 
 char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 = ' ';
 int tabuleiroVelha();
-int aleatorio(int, int);
+//int contadorPontos();
 
 int main(){
 
@@ -95,8 +95,6 @@ int main(){
 			}while(coluna <= 0 || coluna >= 4);
 		}
 
-			
-
 		//A variavevel 'podePedirLetra' representa o seguinte: o usuário ja imputou um valor valido para a linha e para a coluna. Assim, pode prosseguir para inserir a letra
 		if(podePedirLetra){
 			if(quemJogaPrimeiro == 0){
@@ -127,16 +125,22 @@ int main(){
 				}
 				tabuleiroVelha();
 
-				printf("\nAgora e minha vez!");
-				printf("\nAguarde, estou pensando.......\n");
+				printf("\n\n");
 
 				quemJogaPrimeiro = 1;
 			}
 
 			else if(quemJogaPrimeiro == 1){
 				//Nessa lógica é feita a jogada do computador
+				if(full1 == FALSE && full2 == FALSE && full3 == FALSE && full4 == FALSE && full5 == FALSE && full6 == FALSE && full7 == FALSE && full8 == FALSE && full9 == FALSE){
+					printf("\nOla! Vamos jogar?");
+				}else{
+					printf("\nAgora e minha vez!");
+				}
+
 				if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
-					do{
+					printf("\nAguarde, estou pensando na minha jogada.......\n");
+					do{					
 						srand(time(NULL));
 						numAleatorio = rand()%9 + 1;
 
@@ -200,25 +204,28 @@ int main(){
 					}while(pcJaJogou == FALSE);
 
 					printf("\nJa sei! Vou alterar a casa de numero %d", numAleatorio);
-					printf("\nE vou colocar a seguinte letra ");
+					printf("\nE vou colocar a letra ");
 					if(letraAleatoria == 0){
 						printf("s!");
 					}else{
 						printf("o!");
 					}
 					printf("\n");
+					printf("Sua vez!\n\n");
 				}
+
+				tabuleiroVelha();
+
+				printf("\n\n");
+
 				quemJogaPrimeiro = 0;
 			}
 		}
 
-		tabuleiroVelha();
-
-		printf("\nSua vez!\n\n");
-
 		pcJaJogou = FALSE;
 		podePedirLetra = TRUE;
 		contadorRodadas++;
+
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
 
@@ -247,3 +254,23 @@ int tabuleiroVelha(){
 
 	return(somaCasas);
 }
+
+/*int contadorPontos(){
+	if(){
+
+	}else if(){
+
+	}else if(){
+		
+	}else if(){
+		
+	}else if(){
+		
+	}else if(){
+		
+	}else if(){
+		
+	}else if(){
+		
+	}
+}*/
