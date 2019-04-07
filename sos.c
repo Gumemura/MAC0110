@@ -25,13 +25,12 @@ TO DO LIST
 
 void tabuleiroVelha();
 char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 = ' ';
-
-int contadorPontos();
 int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
+
 int pontosPC = 0, pontosJogador = 0;
+int pontoN1 = FALSE, pontoN2 =  FALSE, pontoN3 =  FALSE, pontoN4 =  FALSE, pontoN5 =  FALSE, pontoN6 =  FALSE, pontoN7 =  FALSE, pontoN8 =  FALSE;
 
 int main(){
-
 	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
 	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
 	int coluna, linha;
@@ -129,7 +128,15 @@ int main(){
 					else if(coluna == 3 && full9 == FALSE)	{s9 = inputSouO; full9 = TRUE;}
 				}
 				tabuleiroVelha();
-				contadorPontos(pontosJogador);
+
+				if(((n1 + n2 + n3) == 1 + 6 + 9) && pontoN1 == FALSE)			{pontosJogador++; pontoN1 = TRUE;}
+				if(((n4 + n5 + n6) == 27 + 162 + 243) && pontoN2 == FALSE)		{pontosJogador++; pontoN2 = TRUE;}
+				if(((n7 + n8 + n9) == 729 + 4374 + 6561) && pontoN3 == FALSE)	{pontosJogador++; pontoN3 = TRUE;}
+				if(((n1 + n4 + n7) == 1 + 54 + 729) && pontoN4 == FALSE)		{pontosJogador++; pontoN4 = TRUE;}
+				if(((n2 + n5 + n8) == 3 + 162 + 2187) && pontoN5 == FALSE)		{pontosJogador++; pontoN5 = TRUE;}
+				if(((n3 + n6 + n9) == 3 + 486 + 6561) && pontoN6 == FALSE)		{pontosJogador++; pontoN6 = TRUE;}
+				if(((n3 + n5 + n7) == 9 + 162 + 729) && pontoN7 == FALSE)		{pontosJogador++; pontoN7 = TRUE;}
+				if(((n1 + n5 + n9) == 1 + 162 + 6561) && pontoN8 == FALSE)		{pontosJogador++; pontoN8 = TRUE;}
 
 				printf("\n\n");
 
@@ -221,7 +228,16 @@ int main(){
 				}
 
 				tabuleiroVelha();
-				contadorPontos(pontosPC);
+
+				if(((n1 + n2 + n3) == 1 + 6 + 9) && pontoN1 == FALSE)			{pontosPC++; pontoN1 = TRUE;}
+				if(((n4 + n5 + n6) == 27 + 162 + 243) && pontoN2 == FALSE)		{pontosPC++; pontoN2 = TRUE;}
+				if(((n7 + n8 + n9) == 729 + 4374 + 6561) && pontoN3 == FALSE)	{pontosPC++; pontoN3 = TRUE;}
+				if(((n1 + n4 + n7) == 1 + 54 + 729) && pontoN4 == FALSE)		{pontosPC++; pontoN4 = TRUE;}
+				if(((n2 + n5 + n8) == 3 + 162 + 2187) && pontoN5 == FALSE)		{pontosPC++; pontoN5 = TRUE;}
+				if(((n3 + n6 + n9) == 3 + 486 + 6561) && pontoN6 == FALSE)		{pontosPC++; pontoN6 = TRUE;}
+				if(((n3 + n5 + n7) == 9 + 162 + 729) && pontoN7 == FALSE)		{pontosPC++; pontoN7 = TRUE;}
+				if(((n1 + n5 + n9) == 1 + 162 + 6561) && pontoN8 == FALSE)		{pontosPC++; pontoN8 = TRUE;}
+
 
 				printf("\n\n");
 
@@ -236,21 +252,16 @@ int main(){
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
 }
 
-//Essa função printará o tabuleiro
+//Essa função printará o tabuleiro e setará os um valor numérico para cada casa a depender da letra que ela contiver
 void tabuleiroVelha(){
+
 	printf("\n");
 	printf("\t\t\t %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
 	printf("\t\t\t---+---+---\n");
 	printf("\t\t\t %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
 	printf("\t\t\t---+---+---\n");
 	printf("\t\t\t %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
-}
-
-//Retorna um valor de acordo com os valores dos campos
-int contadorPontos(int pontos){
-
-	int verificadorS1 = 0;//, verificadorS2 = 0, verificadorS3 = 0, verificadorS4 = 0, verificadorS5 = 0, verificadorS6 = 0, verificadorS7 = 0, verificadorS8;
-
+	
 	if(s1 == ' '){n1 = 0;} 		else if(s1 == 's'){n1 = 1;} 	else if(s1 == 'o'){n1 = 2;}
 	if(s2 == ' '){n2 = 0;} 		else if(s2 == 's'){n2 = 3;} 	else if(s2 == 'o'){n2 = 6;}
 	if(s3 == ' '){n3 = 0;} 		else if(s3 == 's'){n3 = 9;} 	else if(s3 == 'o'){n3 = 18;}
@@ -260,13 +271,4 @@ int contadorPontos(int pontos){
 	if(s7 == ' '){n7 = 0;} 		else if(s7 == 's'){n7 = 729;} 	else if(s7 == 'o'){n7 = 1458;}
 	if(s8 == ' '){n8 = 0;} 		else if(s8 == 's'){n8 = 2187;} 	else if(s8 == 'o'){n8 = 4374;}
 	if(s9 == ' '){n9 = 0;} 		else if(s9 == 's'){n9 = 6561;} 	else if(s9 == 'o'){n9 = 13122;}
-
-	if((s1 + s2 + s3) == 16){
-		verificadorS1++;
-		if(verificadorS1 == 1){
-			pontos++;
-		}
-	}
-
-	return 0;
 }
