@@ -27,19 +27,23 @@ void tabuleiroVelha();
 char s1 = ' ',s2 = ' ',s3 = ' ',s4 = ' ',s5 = ' ',s6 = ' ',s7 = ' ',s8 = ' ',s9 = ' ';
 int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0;
 
-int pontosPC = 0, pontosJogador = 0;
-int pontoN1 = FALSE, pontoN2 =  FALSE, pontoN3 =  FALSE, pontoN4 =  FALSE, pontoN5 =  FALSE, pontoN6 =  FALSE, pontoN7 =  FALSE, pontoN8 =  FALSE;
-
 int main(){
-	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE, podePedirLetra = TRUE;
+	int full1 = FALSE, full2 = FALSE, full3 = FALSE, full4 = FALSE, full5 = FALSE, full6 = FALSE, full7 = FALSE, full8 = FALSE, full9 = FALSE;
 	//As variaveis 'full' verificam se já tem algum valor atribuido ao respectivo campo (exemplo: se full1 == true, isso que dizer que o campo 1 (linha 1 coluna 1) já tem um valor ('s' ou 'o'))
-	int coluna, linha;
+	int pontoN1 = FALSE, pontoN2 =  FALSE, pontoN3 =  FALSE, pontoN4 =  FALSE, pontoN5 =  FALSE, pontoN6 =  FALSE, pontoN7 =  FALSE, pontoN8 =  FALSE;
+	//As variaveis pontoN# verificam se determinada combinacao ja foi pontuada
+	
+	int pontosPC = 0, pontosJogador = 0;
+	int coluna, linha, podePedirLetra = TRUE;
 	int numAleatorio, letraAleatoria, pcJaJogou = FALSE, contadorRodadas = 1, quemJogaPrimeiro;
 	char inputSouO;
 
 	//Print inicial do tabuleiro, apenas para introduzi-lo ao jogador
 	printf("\n\t######### JOGO DO S.O.S. #########t\n\n");
-	printf("\tDigite as cordenadas do campo que quer alterar, e a letra que quer inserir\n");
+	printf("\tOBJETIVO: Marcar pontos ao escrever SOS no tabuleiro\n");
+	printf("\tREGRAS: Cada jogador escolhe, em seu turno, uma casa e atribui a ela a letra 'S' ou 'O'\n");
+	printf("\tCOMO JOGAR: Digite as cordenadas do campo que quer alterar e. em seguida, a letra que quer inserir\n\n");
+	printf("\tEXEMPLO: Se quiser alterar a casa de numero 6, insira linha 2 e coluna 3\n\n");
 	printf("\t\t      COLUNAS\n");
 	printf("\t\t     1   2   3\n\n");
 	printf("\t\t1    %d ",1 ); printf("|"); printf(" %d ",2); printf("|"); printf(" %d \n",3);
@@ -48,7 +52,7 @@ int main(){
 	printf("\t\t    ---+---+---\n");
 	printf("\t\t3    %d ",7); printf("|"); printf(" %d ",8); printf("|"); printf(" %d \n\n\n",9);
 
-	printf("Quem voce quer que comece. Voce(0) ou o computador(1)?");
+	printf("\tQuem voce quer que comece. Voce(0) ou o computador(1)?");
 	scanf("%d", &quemJogaPrimeiro);
 	printf("\n\n");
 
@@ -60,39 +64,39 @@ int main(){
 		if(quemJogaPrimeiro == 0){
 			//Aqui é pedido ao usuário que ele impute a linha
 			do{
-				printf("Linha (1 a 3): ");
+				printf("\tLinha (1 a 3): ");
 				scanf("%d", &linha);
 				printf("\n");
 				if(linha <= 0 || linha >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
-					printf("Inserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
+					printf("\tInserir valor entre 1 e 3 (existem apenas 3 linhas!)\n\n");
 				}
 			}while(linha <= 0 || linha >= 4);
 
 			//Aqui é pedido ao usuário que ele impute a coluna
 			do{
-				printf("Coluna (1 a 3): ");
+				printf("\tColuna (1 a 3): ");
 				scanf("%d", &coluna);
 				printf("\n");
 				if(coluna <= 0 || coluna >= 4){ //PROBLEMA.1 na checagem de numero: se for digiatado qualquer coisa que nao um numero, loop infinito
-					printf("Inserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
+					printf("\tInserir valor entre 1 e 3 (existem apenas 3 colunas!)\n\n");
 				}else{
 					//Nesse lógica é verificado se o campo no qual o suário quer inserir já tem um valor 
 					if(linha == 1){
-						if(coluna == 1 && full1 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 2 && full2 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 3 && full3 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						if(coluna == 1 && full1 == TRUE)		{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full2 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full3 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 						else {podePedirLetra = TRUE;}
 					}
 					else if(linha == 2){
-						if(coluna == 1 && full4 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 2 && full5 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 3 && full6 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						if(coluna == 1 && full4 == TRUE)		{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full5 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full6 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 						else {podePedirLetra = TRUE;} 
 					}
 					else if(linha == 3){
-						if(coluna == 1 && full7 == TRUE)		{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 2 && full8 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
-						else if(coluna == 3 && full9 == TRUE)	{printf("Valor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						if(coluna == 1 && full7 == TRUE)		{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 2 && full8 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
+						else if(coluna == 3 && full9 == TRUE)	{printf("\tValor ja preenchido!\n\n"); podePedirLetra = FALSE;}
 						else {podePedirLetra = TRUE;}
 					}
 				}
@@ -103,11 +107,11 @@ int main(){
 		if(podePedirLetra){
 			if(quemJogaPrimeiro == 0){
 				do{
-					printf("Letra ('s' ou 'o'): ");
+					printf("\tLetra ('s' ou 'o'): ");
 					scanf(" %c", &inputSouO);
 					printf("\n");
 					if(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O'){
-						printf("Inserir a letra S ou O (maiusculo ou minusculo)\n\n"); 
+						printf("\tInserir a letra S ou O (maiusculo ou minusculo)\n\n"); 
 					}
 				}while(inputSouO != 's' && inputSouO != 'S' && inputSouO != 'o' && inputSouO != 'O');
 
@@ -129,16 +133,21 @@ int main(){
 				}
 				tabuleiroVelha();
 
+				int valorAnteriorPontosJogador = pontosJogador;
+
 				if(((n1 + n2 + n3) == 1 + 6 + 9) && pontoN1 == FALSE)			{pontosJogador++; pontoN1 = TRUE;}
 				if(((n4 + n5 + n6) == 27 + 162 + 243) && pontoN2 == FALSE)		{pontosJogador++; pontoN2 = TRUE;}
 				if(((n7 + n8 + n9) == 729 + 4374 + 6561) && pontoN3 == FALSE)	{pontosJogador++; pontoN3 = TRUE;}
 				if(((n1 + n4 + n7) == 1 + 54 + 729) && pontoN4 == FALSE)		{pontosJogador++; pontoN4 = TRUE;}
 				if(((n2 + n5 + n8) == 3 + 162 + 2187) && pontoN5 == FALSE)		{pontosJogador++; pontoN5 = TRUE;}
-				if(((n3 + n6 + n9) == 3 + 486 + 6561) && pontoN6 == FALSE)		{pontosJogador++; pontoN6 = TRUE;}
+				if(((n3 + n6 + n9) == 9 + 486 + 6561) && pontoN6 == FALSE)		{pontosJogador++; pontoN6 = TRUE;}
 				if(((n3 + n5 + n7) == 9 + 162 + 729) && pontoN7 == FALSE)		{pontosJogador++; pontoN7 = TRUE;}
 				if(((n1 + n5 + n9) == 1 + 162 + 6561) && pontoN8 == FALSE)		{pontosJogador++; pontoN8 = TRUE;}
 
 				printf("\n\n");
+				if(valorAnteriorPontosJogador != pontosJogador){
+					printf("\t\tPONTO PARA O JOGADOR!!!\n\n");
+				}
 
 				quemJogaPrimeiro = 1;
 			}
@@ -146,13 +155,13 @@ int main(){
 			else if(quemJogaPrimeiro == 1){
 				//Nessa lógica é feita a jogada do computador
 				if(full1 == FALSE && full2 == FALSE && full3 == FALSE && full4 == FALSE && full5 == FALSE && full6 == FALSE && full7 == FALSE && full8 == FALSE && full9 == FALSE){
-					printf("\nOla! Vamos jogar?");
+					printf("\n\tOla! Vamos jogar?");
 				}else{
-					printf("\nAgora e minha vez!");
+					printf("\n\tAgora e minha vez!");
 				}
 
 				if(full1 == FALSE || full2 == FALSE || full3 == FALSE || full4 == FALSE || full5 == FALSE || full6 == FALSE || full7 == FALSE || full8 == FALSE || full9 == FALSE){
-					printf("\nAguarde, estou pensando na minha jogada.......\n");
+					printf("\n\tAguarde, estou pensando na minha jogada.......\n");
 					do{					
 						srand(time(NULL));
 						numAleatorio = rand()%9 + 1;
@@ -216,28 +225,36 @@ int main(){
 						}
 					}while(pcJaJogou == FALSE);
 
-					printf("\nJa sei! Vou alterar a casa de numero %d", numAleatorio);
-					printf("\nE vou colocar a letra ");
+					printf("\n\tJa sei! Vou alterar a casa de numero %d", numAleatorio);
+					printf("\n\tE vou colocar a letra ");
 					if(letraAleatoria == 0){
 						printf("s!");
 					}else{
 						printf("o!");
 					}
 					printf("\n");
-					printf("Sua vez!\n\n");
+
+					if(contadorRodadas != 9){
+						printf("\tSua vez!\n\n");
+					}
 				}
 
 				tabuleiroVelha();
+
+				int valorAnteriorPontosPC = pontosPC;
 
 				if(((n1 + n2 + n3) == 1 + 6 + 9) && pontoN1 == FALSE)			{pontosPC++; pontoN1 = TRUE;}
 				if(((n4 + n5 + n6) == 27 + 162 + 243) && pontoN2 == FALSE)		{pontosPC++; pontoN2 = TRUE;}
 				if(((n7 + n8 + n9) == 729 + 4374 + 6561) && pontoN3 == FALSE)	{pontosPC++; pontoN3 = TRUE;}
 				if(((n1 + n4 + n7) == 1 + 54 + 729) && pontoN4 == FALSE)		{pontosPC++; pontoN4 = TRUE;}
 				if(((n2 + n5 + n8) == 3 + 162 + 2187) && pontoN5 == FALSE)		{pontosPC++; pontoN5 = TRUE;}
-				if(((n3 + n6 + n9) == 3 + 486 + 6561) && pontoN6 == FALSE)		{pontosPC++; pontoN6 = TRUE;}
+				if(((n3 + n6 + n9) == 9 + 486 + 6561) && pontoN6 == FALSE)		{pontosPC++; pontoN6 = TRUE;}
 				if(((n3 + n5 + n7) == 9 + 162 + 729) && pontoN7 == FALSE)		{pontosPC++; pontoN7 = TRUE;}
 				if(((n1 + n5 + n9) == 1 + 162 + 6561) && pontoN8 == FALSE)		{pontosPC++; pontoN8 = TRUE;}
 
+				if(valorAnteriorPontosPC != pontosPC){
+					printf("\t\t\n\nPONTO PARA O COMPUTADOR!!!\n\n");
+				}
 
 				printf("\n\n");
 
@@ -250,17 +267,30 @@ int main(){
 		contadorRodadas++;
 
 	}while(s1 == ' ' || s2 == ' ' || s3 == ' ' || s4 == ' ' || s5 == ' ' || s6 == ' ' || s7 == ' ' || s8 == ' ' || s9 == ' '); 
+
+	printf("\n\n");
+	printf("\t############## PLACAR FINAL ##############\n\n");
+	printf("\t\tJOGADOR: %d\n", pontosJogador);
+	printf("\t\tCOMPUTADOR: %d\n\n\n", pontosPC);
+
+	if(pontosJogador > pontosPC){
+		printf("\t\tVitoria do Jogador!!\n");
+	}else if(pontosJogador < pontosPC){
+		printf("\t\tVitoria do Computador!!\n");
+	}else{
+		printf("\t\tEmpate!!\n");
+	}
 }
 
 //Essa função printará o tabuleiro e setará os um valor numérico para cada casa a depender da letra que ela contiver
 void tabuleiroVelha(){
 
 	printf("\n");
-	printf("\t\t\t %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
-	printf("\t\t\t---+---+---\n");
-	printf("\t\t\t %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
-	printf("\t\t\t---+---+---\n");
-	printf("\t\t\t %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
+	printf("\t\t %c ", s1); printf("|"); printf(" %c ", s2); printf("|"); printf(" %c \n", s3);
+	printf("\t\t---+---+---\n");
+	printf("\t\t %c ", s4); printf("|"); printf(" %c ", s5); printf("|"); printf(" %c \n", s6);
+	printf("\t\t---+---+---\n");
+	printf("\t\t %c ", s7); printf("|"); printf(" %c ", s8); printf("|"); printf(" %c \n", s9);
 	
 	if(s1 == ' '){n1 = 0;} 		else if(s1 == 's'){n1 = 1;} 	else if(s1 == 'o'){n1 = 2;}
 	if(s2 == ' '){n2 = 0;} 		else if(s2 == 's'){n2 = 3;} 	else if(s2 == 'o'){n2 = 6;}
