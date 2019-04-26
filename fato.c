@@ -9,35 +9,45 @@
 #include <stdio.h>
 #include <math.h>
 
-float senTaylor(float x){
+double senTaylor(double x){
 	int k = 1;
-	float termoAntigo, termoNovo, somatoria;
+	double termoAntigo, termoNovo, somatoria;
 
-	somatoria = termoAntigo = x;
+	somatoria = x;
+	termoAntigo = x;
 
 	do{
-		termoNovo = termoAntigo * (-pow(x, 2)/((2*k)*(2*k+1)));
+		termoNovo = termoAntigo * (-pow(x, 2)/((2*k)*((2*k)+1)));
 		somatoria += termoNovo;
 
 		termoAntigo = termoNovo;
 		k++;
-	}while(termoAntigo < pow(10, -8));
+	}while(termoAntigo <= pow(10, -11));
 
 	return somatoria;
 }
 
-int frac(float transp){
-	int inteiro;
+/*float modulo(float transp){
+	if(transp < 0)
+		transp *= -1;
 
-	inteiro = transp * 1;
+	return transp;
 }
 
+float frac(float fracionaria){
+	double store, param;
+
+	store = modf(fracionaria, &param);
+
+	return store;
+}*/
+
 int main(){
-	float sen;
-	int c1, c2;
+	double sen;
+	//int c1, c2;
 
 	printf("x = ");
-	scanf("%f", &sen);
+	scanf("%lf", &sen);
 
-	printf("Sen(%f) = %.8f", sen, senTaylor(sen));
+	printf("Sen(%lf) = %.11lf", sen, senTaylor(sen));
 }
