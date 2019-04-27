@@ -165,8 +165,6 @@ int main(){
 					do{					
 						srand(time(NULL));
 						numAleatorio = rand()%9 + 1;
-
-						srand(time(NULL));
 						letraAleatoria = rand()%2;
 
 						if(numAleatorio == 1 && full1 == FALSE){
