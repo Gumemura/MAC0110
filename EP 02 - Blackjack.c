@@ -54,6 +54,9 @@ int main(){
 
 	srand(frac(c1 * modulo(seno(semente)) + c2));
 
+	printf("\nSeno de %lf = %lf\n",  semente, seno(semente));
+	printf("%lf\n\n", sin(semente));
+
 	int carta, pontosMesa = 0, contadorVitoriaMesa = 0;
 	float porcentagem, num, den;
 
