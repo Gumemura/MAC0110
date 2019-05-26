@@ -21,7 +21,7 @@ int main(){
 	int quemEntra[50];
 	int horaEntra[50], minutoEntra[50];
 	int horaSai[50], minutoSai[50];
-	int flagTemSaida[50], flagTemEntrada[50];
+	int flagTemSaida[50], flagTemEntrada[50], flagAchouSaida[50];
 	int tempoPermanencia[50];
 
 	FILE * doctxt;
@@ -54,15 +54,18 @@ int main(){
 			horaEntra[contEntra] = horas;
 			minutoEntra[contEntra] = minutos;
 			flagTemEntrada[contEntra] = TRUE;
+			flagTemSaida[contEntra] = FALSE;
+			flagAchouSaida[contEntra] = FALSE;
 		}else{
 			int achouCorresp = FALSE;
 			for(int x = 0; x < contEntra + 1; x++){
 				//Esse 'for' relaciona o horario de saida a pessoa que previamente entrou
-				if(nusp == quemEntra[x]){
+				if(nusp == quemEntra[x] && flagAchouSaida[x] == FALSE){
 					horaSai[x] = horas;
 					minutoSai[x] = minutos;
 					flagTemSaida[x] = TRUE;
 					achouCorresp = TRUE;
+					flagAchouSaida[x] = TRUE;
 				}
 			}
 			if(achouCorresp == FALSE){
