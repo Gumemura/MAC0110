@@ -31,7 +31,7 @@ void addX(int arrayAdd[]){
 	}
 
 	if(tem == FALSE)
-		arrayAdd[quant + 1] = valorChecado;
+		arrayAdd[quant] = valorChecado;
 }
 
 int main(){
@@ -51,11 +51,13 @@ int main(){
 
 	if(temX(lista) == -1){
 		printf("\n%d nao consta na lista. Vamos adiciona-lo: ", valorChecado);
-		//addX(lista);
-		for (int r = 0; r < quant + 1; r++){
+		addX(lista);
+
+		for (int r = 0; r < (quant + 1); r++){
 			printf("%d | ", lista[r]);
 		}
-	}else
+	}else{
 		printf("\nO numero %d eh o %dth da lista (indice [%d])", valorChecado, temX(lista) + 1, temX(lista));
+	}
 	
 }
