@@ -16,6 +16,8 @@ int temX(int arrayInt[]){
 		}
 	}
 
+	printf("\noiueeee");
+
 	if(boolean == FALSE)
 		temXRetorno = -1;
 
