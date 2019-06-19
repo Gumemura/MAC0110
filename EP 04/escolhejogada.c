@@ -21,8 +21,6 @@
 #define TRUE 1
 #define FALSE 0
 
-
-
 void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 	int linhaAnalise, colAnalise, cPI = 0, aPJ[3][MAX], cPJ = 0, pC = FALSE;
 
@@ -183,6 +181,189 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 						pC = FALSE;
 					}
 
+					//Sudeste
+					if(sentidoNS == 3){
+						linhaAnalise = lin + 1;
+						colAnalise = col + 1;
+
+						if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+							while(linhaAnalise < 8 && colAnalise < 8){
+								if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+									cPI++;
+								}else if(tabuleiro[linhaAnalise][colAnalise] == 0){
+									if(cPI > 0)
+										pC = TRUE;	
+									break;
+								}else{
+									break;
+								}
+								linhaAnalise++;
+								colAnalise++;
+							}
+
+							if(pC == TRUE){
+								if(linhaAnalise < 8 && colAnalise < 8){
+									if(verificaVetor(linhaAnalise, colAnalise, aPJ) == -1){
+										aPJ[0][cPJ] = linhaAnalise;
+										aPJ[1][cPJ] = colAnalise;
+										aPJ[2][cPJ] = cPI;
+										cPJ++;
+									}else{
+										aPJ[2][verificaVetor(linhaAnalise, colAnalise, aPJ)] += cPI;
+									}
+								}
+							}
+						}
+
+						cPI = 0;
+						pC = FALSE;
+					}
+
+					//Sul
+					if(sentidoNS == 4){
+						linhaAnalise = lin + 1;
+
+						if(tabuleiro[linhaAnalise][col] == (cor * -1)){
+							for(linhaAnalise = lin + 1; linhaAnalise < 8; linhaAnalise++){
+								if(tabuleiro[linhaAnalise][col] == (cor * -1)){
+									cPI++;
+								}else if(tabuleiro[linhaAnalise][col] == 0){
+									if(cPI > 0)
+										pC = TRUE;	
+									break;
+								}else{
+									break;
+								}
+							}
+
+							if(pC == TRUE){
+								if(linhaAnalise < 8){
+									if(verificaVetor(linhaAnalise, col, aPJ) == -1){
+										aPJ[0][cPJ] = linhaAnalise;
+										aPJ[1][cPJ] = col;
+										aPJ[2][cPJ] = cPI;
+										cPJ++;
+									}else{
+										aPJ[2][verificaVetor(linhaAnalise, col, aPJ)] += cPI;
+									}
+								}
+							}
+						}
+
+						cPI = 0;
+						pC = FALSE;
+					}
+
+					//Sudoeste
+					if(sentidoNS == 5){
+						linhaAnalise = lin + 1;
+						colAnalise = col - 1;
+
+						if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+							while(linhaAnalise < 8 && colAnalise >= 0){
+								if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+									cPI++;
+								}else if(tabuleiro[linhaAnalise][colAnalise] == 0){
+									if(cPI > 0)
+										pC = TRUE;	
+									break;
+								}else{
+									break;
+								}
+								linhaAnalise++;
+								colAnalise--;
+							}
+
+							if(pC == TRUE){
+								if(linhaAnalise < 8 && colAnalise >= 0){
+									if(verificaVetor(linhaAnalise, colAnalise, aPJ) == -1){
+										aPJ[0][cPJ] = linhaAnalise;
+										aPJ[1][cPJ] = colAnalise;
+										aPJ[2][cPJ] = cPI;
+										cPJ++;
+									}else{
+										aPJ[2][verificaVetor(linhaAnalise, colAnalise, aPJ)] += cPI;
+									}
+								}
+							}
+						}
+
+						cPI = 0;
+						pC = FALSE;
+					}
+
+					//Oeste
+					if(sentidoNS == 6){
+						colAnalise = col - 1;
+
+						if(tabuleiro[lin][colAnalise] == (cor * -1)){
+							for(colAnalise = col - 1; colAnalise >= 0; colAnalise--){
+								if(tabuleiro[lin][colAnalise] == (cor * -1)){
+									cPI++;
+								}else if(tabuleiro[lin][colAnalise] == 0){
+									if(cPI > 0)
+										pC = TRUE;	
+									break;
+								}else{
+									break;
+								}
+							}
+
+							if(pC == TRUE){
+								if(colAnalise >= 0){
+									if(verificaVetor(lin, colAnalise, aPJ) == -1){
+										aPJ[0][cPJ] = lin;
+										aPJ[1][cPJ] = colAnalise;
+										aPJ[2][cPJ] = cPI;
+										cPJ++;
+									}else{
+										aPJ[2][verificaVetor(lin, colAnalise, aPJ)] += cPI;
+									}
+								}
+							}
+						}
+
+						cPI = 0;
+						pC = FALSE;
+					}
+
+					//Noroeste
+					if(sentidoNS == 7){
+						linhaAnalise = lin - 1;
+						colAnalise = col - 1;
+
+						if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+							while(linhaAnalise >= 0 && colAnalise >= 0){
+								if(tabuleiro[linhaAnalise][colAnalise] == (cor * -1)){
+									cPI++;
+								}else if(tabuleiro[linhaAnalise][colAnalise] == 0){
+									if(cPI > 0)
+										pC = TRUE;	
+									break;
+								}else{
+									break;
+								}
+								linhaAnalise--;
+								colAnalise--;
+							}
+
+							if(pC == TRUE){
+								if(linhaAnalise >= 0 && colAnalise >= 0){
+									if(verificaVetor(linhaAnalise, colAnalise, aPJ) == -1){
+										aPJ[0][cPJ] = linhaAnalise;
+										aPJ[1][cPJ] = colAnalise;
+										aPJ[2][cPJ] = cPI;
+										cPJ++;
+									}else{
+										aPJ[2][verificaVetor(linhaAnalise, colAnalise, aPJ)] += cPI;
+									}
+								}
+							}
+						}
+
+						cPI = 0;
+						pC = FALSE;
+					}
 				}
 			}
 		}
@@ -199,23 +380,37 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 	}
 }
 
-void printaTabuleiro(int v[8][8]){
+void printaTabuleiro(int a[8][8]){
+	char v[8][8];
+
+	for (int linhaConverte = 0; linhaConverte < 8; linhaConverte++){
+		for (int colunaConverte = 0; colunaConverte < 8; colunaConverte++){
+			if(a[linhaConverte][colunaConverte] == 0){
+				v[linhaConverte][colunaConverte] = ' ';
+			}else if(a[linhaConverte][colunaConverte] == 1){
+				v[linhaConverte][colunaConverte] = 'O';
+			}else{
+				v[linhaConverte][colunaConverte] = 'X';
+			}
+		}
+	}
+
 	printf("\n\t\t 0   1   2   3   4   5   6   7\n\n");
-	printf("\t0\t %d ", v[0][0]); printf("|"); printf(" %d ", v[0][1]); printf("|"); printf(" %d ", v[0][2]); printf("|"); printf(" %d ", v[0][3]); printf("|"); printf(" %d ", v[0][4]); printf("|"); printf(" %d ", v[0][5]); printf("|"); printf(" %d ", v[0][6]); printf("|"); printf(" %d \n", v[0][7]);
+	printf("\t0\t %c ", v[0][0]); printf("|"); printf(" %c ", v[0][1]); printf("|"); printf(" %c ", v[0][2]); printf("|"); printf(" %c ", v[0][3]); printf("|"); printf(" %c ", v[0][4]); printf("|"); printf(" %c ", v[0][5]); printf("|"); printf(" %c ", v[0][6]); printf("|"); printf(" %c \n", v[0][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t1\t %d ", v[1][0]); printf("|"); printf(" %d ", v[1][1]); printf("|"); printf(" %d ", v[1][2]); printf("|"); printf(" %d ", v[1][3]); printf("|"); printf(" %d ", v[1][4]); printf("|"); printf(" %d ", v[1][5]); printf("|"); printf(" %d ", v[1][6]); printf("|"); printf(" %d \n", v[1][7]);
+	printf("\t1\t %c ", v[1][0]); printf("|"); printf(" %c ", v[1][1]); printf("|"); printf(" %c ", v[1][2]); printf("|"); printf(" %c ", v[1][3]); printf("|"); printf(" %c ", v[1][4]); printf("|"); printf(" %c ", v[1][5]); printf("|"); printf(" %c ", v[1][6]); printf("|"); printf(" %c \n", v[1][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t2\t %d ", v[2][0]); printf("|"); printf(" %d ", v[2][1]); printf("|"); printf(" %d ", v[2][2]); printf("|"); printf(" %d ", v[2][3]); printf("|"); printf(" %d ", v[2][4]); printf("|"); printf(" %d ", v[2][5]); printf("|"); printf(" %d ", v[2][6]); printf("|"); printf(" %d \n", v[2][7]);
+	printf("\t2\t %c ", v[2][0]); printf("|"); printf(" %c ", v[2][1]); printf("|"); printf(" %c ", v[2][2]); printf("|"); printf(" %c ", v[2][3]); printf("|"); printf(" %c ", v[2][4]); printf("|"); printf(" %c ", v[2][5]); printf("|"); printf(" %c ", v[2][6]); printf("|"); printf(" %c \n", v[2][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t3\t %d ", v[3][0]); printf("|"); printf(" %d ", v[3][1]); printf("|"); printf(" %d ", v[3][2]); printf("|"); printf(" %d ", v[3][3]); printf("|"); printf(" %d ", v[3][4]); printf("|"); printf(" %d ", v[3][5]); printf("|"); printf(" %d ", v[3][6]); printf("|"); printf(" %d \n", v[3][7]);
+	printf("\t3\t %c ", v[3][0]); printf("|"); printf(" %c ", v[3][1]); printf("|"); printf(" %c ", v[3][2]); printf("|"); printf(" %c ", v[3][3]); printf("|"); printf(" %c ", v[3][4]); printf("|"); printf(" %c ", v[3][5]); printf("|"); printf(" %c ", v[3][6]); printf("|"); printf(" %c \n", v[3][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t4\t %d ", v[4][0]); printf("|"); printf(" %d ", v[4][1]); printf("|"); printf(" %d ", v[4][2]); printf("|"); printf(" %d ", v[4][3]); printf("|"); printf(" %d ", v[4][4]); printf("|"); printf(" %d ", v[4][5]); printf("|"); printf(" %d ", v[4][6]); printf("|"); printf(" %d \n", v[4][7]);
+	printf("\t4\t %c ", v[4][0]); printf("|"); printf(" %c ", v[4][1]); printf("|"); printf(" %c ", v[4][2]); printf("|"); printf(" %c ", v[4][3]); printf("|"); printf(" %c ", v[4][4]); printf("|"); printf(" %c ", v[4][5]); printf("|"); printf(" %c ", v[4][6]); printf("|"); printf(" %c \n", v[4][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t5\t %d ", v[5][0]); printf("|"); printf(" %d ", v[5][1]); printf("|"); printf(" %d ", v[5][2]); printf("|"); printf(" %d ", v[5][3]); printf("|"); printf(" %d ", v[5][4]); printf("|"); printf(" %d ", v[5][5]); printf("|"); printf(" %d ", v[5][6]); printf("|"); printf(" %d \n", v[5][7]);
+	printf("\t5\t %c ", v[5][0]); printf("|"); printf(" %c ", v[5][1]); printf("|"); printf(" %c ", v[5][2]); printf("|"); printf(" %c ", v[5][3]); printf("|"); printf(" %c ", v[5][4]); printf("|"); printf(" %c ", v[5][5]); printf("|"); printf(" %c ", v[5][6]); printf("|"); printf(" %c \n", v[5][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t6\t %d ", v[6][0]); printf("|"); printf(" %d ", v[6][1]); printf("|"); printf(" %d ", v[6][2]); printf("|"); printf(" %d ", v[6][3]); printf("|"); printf(" %d ", v[6][4]); printf("|"); printf(" %d ", v[6][5]); printf("|"); printf(" %d ", v[6][6]); printf("|"); printf(" %d \n", v[6][7]);
+	printf("\t6\t %c ", v[6][0]); printf("|"); printf(" %c ", v[6][1]); printf("|"); printf(" %c ", v[6][2]); printf("|"); printf(" %c ", v[6][3]); printf("|"); printf(" %c ", v[6][4]); printf("|"); printf(" %c ", v[6][5]); printf("|"); printf(" %c ", v[6][6]); printf("|"); printf(" %c \n", v[6][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
-	printf("\t7\t %d ", v[7][0]); printf("|"); printf(" %d ", v[7][1]); printf("|"); printf(" %d ", v[7][2]); printf("|"); printf(" %d ", v[7][3]); printf("|"); printf(" %d ", v[7][4]); printf("|"); printf(" %d ", v[7][5]); printf("|"); printf(" %d ", v[7][6]); printf("|"); printf(" %d \n", v[7][7]);
+	printf("\t7\t %c ", v[7][0]); printf("|"); printf(" %c ", v[7][1]); printf("|"); printf(" %c ", v[7][2]); printf("|"); printf(" %c ", v[7][3]); printf("|"); printf(" %c ", v[7][4]); printf("|"); printf(" %c ", v[7][5]); printf("|"); printf(" %c ", v[7][6]); printf("|"); printf(" %c \n", v[7][7]);
 }
 
 int main(){
@@ -226,20 +421,33 @@ int main(){
 			tabJogo[q][w] = 0;
 		}
 	}
+
 	tabJogo[0][0] = -1;
 
-
-
-
 	tabJogo[7][3] = -1;
-	tabJogo[7][2] = -1;
+	//tabJogo[7][2] = -1;
+	//tabJogo[1][0] = -1;
 
 	tabJogo[6][3] = 1;
+	tabJogo[6][5] = 1;
 
-	tabJogo[4][3] = 1;
+	tabJogo[0][3] = -1;
+	tabJogo[1][3] = 1;
+	tabJogo[2][3] = 1;
+	tabJogo[3][3] = 1;
+	//tabJogo[4][3] = 1;
 	tabJogo[5][3] = 1;
-	tabJogo[6][3] = 1;
+	tabJogo[4][3] = 1;
+	//tabJogo[6][3] = 1;
 
+	tabJogo[7][6] = -1;
+	tabJogo[2][7] = -1;
+
+	//tabJogo[5][6] = 1;
+
+	tabJogo[2][1] = 1;
+	tabJogo[3][2] = 1;
+	//tabJogo[5][5] = 1;
 
 	tabJogo[4][5] = 1;
 	tabJogo[3][6] = 1;
@@ -248,23 +456,12 @@ int main(){
 
 	tabJogo[5][1] = 1;
 	tabJogo[5][2] = 1;
-	tabJogo[5][5] = 1;
-
-
-
-
+	//tabJogo[5][5] = 1;
 
 	//tabJogo[2][7] = 1;
 	tabJogo[5][4] = 1;
 
 	escolhejogada(tabJogo, -1, &linhaMuda, &colMuda);
-
-	for(int e = 0; e < 8; e++){
-		for (int r = 0; r < 8; r++){
-			if(tabJogo[e][r] == -1)
-				tabJogo[e][r] = 2;
-		}
-	}
 
 	printaTabuleiro(tabJogo);
 	printf("\n\nLinha: %d\nColuna: %d\n\n", linhaMuda, colMuda);
