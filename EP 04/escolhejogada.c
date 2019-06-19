@@ -69,7 +69,9 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 						6 —	  — 2
 						  / | \ 
 						 5  4  3
-				*/
+
+				3. Caso se encontre uma sequencia de valida, a coordenada da possicao onde pode ser feita a jogada é armazenada no vetor aPJ, bem como a pontuação que essa jogada acarretaria
+				4. Depois, sao analisados todos os elemementos de aPJ e seleciona-se a coordenada com a maior pontuação*/
 			if(tabuleiro[lin][col] == cor){
 				for(int sentidoNS = 0; sentidoNS < LIMITE; sentidoNS++){
 					//Norte
@@ -385,6 +387,7 @@ void printaTabuleiro(int a[8][8]){
 
 	for (int linhaConverte = 0; linhaConverte < 8; linhaConverte++){
 		for (int colunaConverte = 0; colunaConverte < 8; colunaConverte++){
+			//Aqui é feita a conversao dos elementos do vetor de numeros para letra, com o intuito de melhorar a visibilidade
 			if(a[linhaConverte][colunaConverte] == 0){
 				v[linhaConverte][colunaConverte] = ' ';
 			}else if(a[linhaConverte][colunaConverte] == 1){
