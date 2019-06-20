@@ -373,12 +373,20 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 
 	int maiorValor = 0;
 	for(int sp = 0; sp < MAX; sp++){
-		//dentro dese for vamos atribuir valor a *linha e *coluna com base no 3º elemento de aPJ (aPJ[2]), ou seja, com base no conjunto que mais tem pontos
+		//dentro dese 'for' vamos atribuir valor a *linha e *coluna com base no 3º elemento de aPJ (aPJ[2]), ou seja, com base nos pontos
 		if(aPJ[2][sp] > maiorValor){
 			*linha = aPJ[0][sp];
 			*coluna = aPJ[1][sp];
 			maiorValor = aPJ[2][sp];
 		}
+	}
+}
+
+int podejogar(int tabuleiro[8][8], int cor, int l, int c){
+	int retornoPodeJogar = 0;
+
+	if(){
+		
 	}
 }
 
@@ -419,13 +427,41 @@ void printaTabuleiro(int a[8][8]){
 int main(){
 	int tabJogo[8][8], linhaMuda = 0, colMuda = 0;
 
+	int corJogador, corIA, contadorRodadas = 0;
+
+	int linhaJogada, colJogada;
+
 	for(int q = 0; q < 8; q++){
 		for (int w = 0; w < 8; w++){
+			//Resetando todas as casas do tabuleiro
 			tabJogo[q][w] = 0;
 		}
 	}
 
-	tabJogo[0][0] = -1;
+	printf("\n\t\tREVERSI\n\nEscolha sua cor (1 para branco ou -1 para pretas): ");
+	scanf("%d", &corJogador);
+
+	while(corJogador != 1 && corJogador != -1){
+		printf("Numero invalido! Insira 1 para branco ou -1 para pretas): ");
+		scanf("%d", &corJogador);
+	}
+
+	corIA = corJogador * -1;
+
+	if(corJogador == -1)
+		printf("\n\nVamos comecar! Como voce escolheu as pretas, voce comeca");
+	else
+		printf("\n\nVamos comecar! As pretas comecam");
+
+	printf("\nObs.: No tabuleiro, as pecas brancas sao representadas por 'O', e as pretas por 'X'\n\n");
+
+	//Jogada do jogador pessoa
+	printf("Insira as coordenadas da sua jogada (linha e coluna, respectivamente): ");
+	scanf("%d %d", &linhaJogada, &colJogada);
+
+	
+
+	/*tabJogo[0][0] = -1;
 
 	tabJogo[7][3] = -1;
 	//tabJogo[7][2] = -1;
@@ -462,9 +498,9 @@ int main(){
 	//tabJogo[5][5] = 1;
 
 	//tabJogo[2][7] = 1;
-	tabJogo[5][4] = 1;
+	tabJogo[5][4] = 1;*/
 
-	escolhejogada(tabJogo, -1, &linhaMuda, &colMuda);
+	escolhejogada(tabJogo, corIA, &linhaMuda, &colMuda);
 
 	printaTabuleiro(tabJogo);
 	printf("\n\nLinha: %d\nColuna: %d\n\n", linhaMuda, colMuda);
