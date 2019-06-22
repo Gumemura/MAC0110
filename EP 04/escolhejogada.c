@@ -20,6 +20,8 @@
 #define MAX 64
 #define TRUE 1
 #define FALSE 0
+#define JOGADOR 1
+#define IA 0
 
 void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 	int linhaAnalise, colAnalise, cPI = 0, aPJ[3][MAX], cPJ = 0, pC = FALSE;
@@ -110,7 +112,7 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 						pC = FALSE;
 					}
 
-					//Noroeste
+					//Nordeste
 					if(sentidoNS == 1){
 						linhaAnalise = lin - 1;
 						colAnalise = col + 1;
@@ -383,11 +385,187 @@ void escolhejogada(int tabuleiro[8][8], int cor, int *linha, int *coluna){
 }
 
 int podejogar(int tabuleiro[8][8], int cor, int l, int c){
-	int retornoPodeJogar = 0;
+	int jogadaValida = 0;
 
-	if(){
-		
+	int lApj, cApj, contadorPJ = 0;
+	//lApj = Linha analise pode jogar
+	//cApj = coluna analise pode jogar
+
+	if(tabuleiro[l][c] == 0){
+		for(int pjNS = 0; pjNS < 8; pjNS++){
+			//Norte
+			if(pjNS == 0){
+				lApj = l - 1;
+				if(tabuleiro[lApj][c] == (cor * -1)){
+					for(lApj = l - 1; lApj >= 0; lApj--){
+						if(tabuleiro[lApj][c] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][c] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;
+							break;
+						}
+					}
+				}
+				contadorPJ = 0;
+			}
+
+
+			//Nordeste
+			if(pjNS == 1){
+				lApj = l - 1;
+				cApj = c + 1;
+
+				if(tabuleiro[lApj][cApj] == (cor * -1)){
+					while(lApj >= 0 && cApj < 8){
+						if(tabuleiro[lApj][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;
+							break;
+						}
+						lApj--;
+						cApj++;
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Leste
+			if(pjNS == 2){
+				cApj = c + 1;
+				if(tabuleiro[l][cApj] == (cor * -1)){
+					for(cApj = c + 1; cApj < 8; cApj++){
+						if(tabuleiro[l][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[l][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Sudeste
+			if(pjNS == 3){
+				lApj = l + 1;
+				cApj = c + 1;
+
+				if(tabuleiro[lApj][cApj] == (cor * -1)){
+					while(lApj < 8 && cApj < 8){
+						if(tabuleiro[lApj][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+						lApj++;
+						cApj++;
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Sul
+			if(pjNS == 4){
+				lApj = l + 1;
+
+				if(tabuleiro[lApj][c] == (cor * -1)){
+					for(lApj = l + 1; lApj < 8; lApj++){
+						if(tabuleiro[lApj][c] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][c] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Sudoeste
+			if(pjNS == 5){
+				lApj = l + 1;
+				cApj = c - 1;
+
+				if(tabuleiro[lApj][cApj] == (cor * -1)){
+					while(lApj < 8 && cApj >= 0){
+						if(tabuleiro[lApj][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+						lApj++;
+						cApj--;
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Oeste
+			if(pjNS == 6){
+				cApj = c - 1;
+
+				if(tabuleiro[l][cApj] == (cor * -1)){
+					for(cApj = c - 1; cApj >= 0; cApj--){
+						if(tabuleiro[l][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[l][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+					}
+				}
+				contadorPJ = 0;
+			}
+
+			//Noroeste
+			if(pjNS == 7){
+				lApj = l - 1;
+				cApj = c - 1;
+
+				if(tabuleiro[lApj][cApj] == (cor * -1)){
+					while(lApj >= 0 && cApj >= 0){
+						if(tabuleiro[lApj][cApj] == (cor * -1)){
+							contadorPJ++;
+						}else if(tabuleiro[lApj][cApj] == 0){
+							break;
+						}else{
+							if(contadorPJ > 0)
+								jogadaValida = 1;	
+							break;
+						}
+						lApj--;
+						cApj--;
+					}
+				}
+				contadorPJ = 0;
+			}
+		}
 	}
+	return jogadaValida;
 }
 
 void printaTabuleiro(int a[8][8]){
@@ -422,14 +600,275 @@ void printaTabuleiro(int a[8][8]){
 	printf("\t6\t %c ", v[6][0]); printf("|"); printf(" %c ", v[6][1]); printf("|"); printf(" %c ", v[6][2]); printf("|"); printf(" %c ", v[6][3]); printf("|"); printf(" %c ", v[6][4]); printf("|"); printf(" %c ", v[6][5]); printf("|"); printf(" %c ", v[6][6]); printf("|"); printf(" %c \n", v[6][7]);
 	printf("\t\t---+---+---+---+---+---+---+---\n");
 	printf("\t7\t %c ", v[7][0]); printf("|"); printf(" %c ", v[7][1]); printf("|"); printf(" %c ", v[7][2]); printf("|"); printf(" %c ", v[7][3]); printf("|"); printf(" %c ", v[7][4]); printf("|"); printf(" %c ", v[7][5]); printf("|"); printf(" %c ", v[7][6]); printf("|"); printf(" %c \n", v[7][7]);
+	printf("\n\n");
+}
+
+void joga(int tabuleiro[8][8], int cor, int l, int c){
+	int lJ, cJ, contadorJoga = 0, aquiMesmo = FALSE;
+
+	for(int jNS = 0; jNS < 8; jNS++){
+		//Norte
+		if(jNS == 0){
+			lJ = l - 1;
+			if(tabuleiro[lJ][c] == (cor * -1)){
+				for(lJ = l - 1; lJ >= 0; lJ--){
+					if(tabuleiro[lJ][c] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][c] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;
+						break;
+					}else{
+						break;
+					}
+				}
+			}
+
+			if(aquiMesmo == TRUE){
+				for(int trocaL = lJ + 1; trocaL <= l; trocaL++){
+					tabuleiro[trocaL][c] = cor;
+				}
+			}
+
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Nordeste
+		if(jNS == 1){
+			lJ = l - 1;
+			cJ = c + 1;
+
+			if(tabuleiro[lJ][cJ] == (cor * -1)){
+				while(lJ >= 0 && cJ < 8){
+					if(tabuleiro[lJ][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;
+						break;
+					}else{
+						break;
+					}
+					lJ--;
+					cJ++;
+				}
+
+				if(aquiMesmo == TRUE){
+					lJ += 1;
+					cJ -= 1;
+					for(int q = 0; q <= contadorJoga; q++){
+						tabuleiro[lJ][cJ] = cor;
+						lJ++;
+						cJ--;
+					}
+				}
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Leste
+		if(jNS == 2){
+			cJ = c + 1;
+			if(tabuleiro[l][cJ] == (cor * -1)){
+				for(cJ = c + 1; cJ < 8; cJ++){
+					if(tabuleiro[l][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[l][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;	
+						break;
+					}else{
+						break;
+					}
+				}
+				if(aquiMesmo == TRUE){
+					cJ -= 1;
+					for(int trocaC = cJ; trocaC >= c; trocaC--)
+						tabuleiro[l][trocaC] = cor;
+				}
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Sudeste
+		if(jNS == 3){
+			lJ = l + 1;
+			cJ = c + 1;
+
+			if(tabuleiro[lJ][cJ] == (cor * -1)){
+				while(lJ < 8 && cJ < 8){
+					if(tabuleiro[lJ][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;	
+						break;
+					}else{
+						break;
+					}
+					lJ++;
+					cJ++;
+				}
+
+				if(aquiMesmo == TRUE){
+					lJ -= 1;
+					cJ -= 1;
+
+					for(int q = 0; q <= contadorJoga; q++){
+						tabuleiro[lJ][cJ] = cor;
+						lJ--;
+						cJ--;
+					}
+				}
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Sul
+		if(jNS == 4){
+			lJ = l + 1;
+
+			if(tabuleiro[lJ][c] == (cor * -1)){
+				for(lJ = l + 1; lJ < 8; lJ++){
+					if(tabuleiro[lJ][c] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][c] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;
+						break;
+					}else{
+						break;
+					}
+				}
+
+				if(aquiMesmo == TRUE){
+					lJ -= 1;
+					for(int qSUL = 0; qSUL <= contadorJoga; qSUL++){
+						tabuleiro[lJ][c] = cor;
+						lJ--;
+					}
+				}
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Sudoeste
+		if(jNS == 5){
+			lJ = l + 1;
+			cJ = c - 1;
+
+			if(tabuleiro[lJ][cJ] == (cor * -1)){
+				while(lJ < 8 && cJ >= 0){
+					if(tabuleiro[lJ][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;	
+						break;
+					}else{
+						break;
+					}
+					lJ++;
+					cJ--;
+				}
+
+				if(aquiMesmo == TRUE){
+					lJ -= 1;
+					cJ += 1;
+
+					for(int q = 0; q <= contadorJoga; q++){
+						tabuleiro[lJ][cJ] = cor;
+						lJ--;
+						cJ++;
+					}
+
+				}
+			}
+
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Oeste
+		if(jNS == 6){
+			cJ = c - 1;
+
+			if(tabuleiro[l][cJ] == (cor * -1)){
+				for(cJ = c - 1; cJ >= 0; cJ--){
+					if(tabuleiro[l][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[l][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;	
+						break;
+					}else{
+						break;
+					}
+				}
+
+				if(aquiMesmo == TRUE){
+					cJ += 1;
+					for(int trocaC = cJ; trocaC <= c; trocaC++)
+						tabuleiro[l][trocaC] = cor;
+				}
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+
+		//Noroeste
+		if(jNS == 7){
+			lJ = l - 1;
+			cJ = c - 1;
+
+			if(tabuleiro[lJ][cJ] == (cor * -1)){
+				while(lJ >= 0 && cJ >= 0){
+					if(tabuleiro[lJ][cJ] == (cor * -1)){
+						contadorJoga++;
+					}else if(tabuleiro[lJ][cJ] == cor){
+						if(contadorJoga > 0)
+							aquiMesmo = TRUE;	
+						break;
+					}else{
+						break;
+					}
+					lJ--;
+					cJ--;
+				}
+
+				if(aquiMesmo == TRUE){
+					lJ += 1;
+					cJ += 1;
+					for(int q = 0; q <= contadorJoga; q++){
+						tabuleiro[lJ][cJ] = cor;
+						lJ++;
+						cJ++;
+					}
+				}
+
+
+			}
+			contadorJoga = 0;
+			aquiMesmo = FALSE;
+		}
+	}
 }
 
 int main(){
 	int tabJogo[8][8], linhaMuda = 0, colMuda = 0;
 
-	int corJogador, corIA, contadorRodadas = 0;
+	int corJogador, corIA, contadorRodadas = 1, quemJogaAgora, semJogadaValida = 0, fimDeJogo = FALSE;
 
 	int linhaJogada, colJogada;
+	int lVstj, cVstj;
+	int pontosPreta = 2, pontosBranco = 2;
+	//lVstj = linha verifica se tem jogada. verifica se existem jogada valida
+	//cVstj = coluna verifica se tem jogada
 
 	for(int q = 0; q < 8; q++){
 		for (int w = 0; w < 8; w++){
@@ -438,7 +877,16 @@ int main(){
 		}
 	}
 
-	printf("\n\t\tREVERSI\n\nEscolha sua cor (1 para branco ou -1 para pretas): ");
+	tabJogo[3][3] = 1;
+	tabJogo[4][4] = 1;
+
+	tabJogo[3][4] = -1;
+	tabJogo[4][3] = -1;
+
+	printf("\n\t\t---------- REVERSI ----------\n\n");
+	printaTabuleiro(tabJogo);
+
+	printf("\nEscolha sua cor (1 para branco ou -1 para pretas): ");
 	scanf("%d", &corJogador);
 
 	while(corJogador != 1 && corJogador != -1){
@@ -451,59 +899,86 @@ int main(){
 	if(corJogador == -1)
 		printf("\n\nVamos comecar! Como voce escolheu as pretas, voce comeca");
 	else
-		printf("\n\nVamos comecar! As pretas comecam");
+		printf("\n\nVamos comecar! Como o computador joga com as pecas pretas, ele começa!");
 
 	printf("\nObs.: No tabuleiro, as pecas brancas sao representadas por 'O', e as pretas por 'X'\n\n");
 
-	//Jogada do jogador pessoa
-	printf("Insira as coordenadas da sua jogada (linha e coluna, respectivamente): ");
-	scanf("%d %d", &linhaJogada, &colJogada);
+	//printaTabuleiro(tabJogo);
 
-	
+	if(-1 == corJogador){
+		quemJogaAgora = JOGADOR;
+		printaTabuleiro(tabJogo);
+	}else
+		quemJogaAgora = IA;
 
-	/*tabJogo[0][0] = -1;
+	while(fimDeJogo == FALSE){
+		printf("\t############## RODADA %d ###############\n", contadorRodadas);
+		printf("\t    PRETAS: %d               BRANCAS: %d\n\n", pontosPreta, pontosBranco);
+		if(quemJogaAgora == JOGADOR){
+			escolhejogada(tabJogo, corJogador, &lVstj, &cVstj);
 
-	tabJogo[7][3] = -1;
-	//tabJogo[7][2] = -1;
-	//tabJogo[1][0] = -1;
+			if(lVstj != -1 && cVstj != -1){
+				printf("\tInsira as coordenadas da sua jogada (linha e coluna, respectivamente): ");
+				scanf("%d %d", &linhaJogada, &colJogada);
 
-	tabJogo[6][3] = 1;
-	tabJogo[6][5] = 1;
+				if(podejogar(tabJogo, corJogador, linhaJogada, colJogada) == 0/*jogada invalida*/){
+					printf("\nJOGADA INVALIDA PERDEU\n");
+					fimDeJogo = TRUE;
+				}else{
+					joga(tabJogo, corJogador, linhaJogada, colJogada);
+				}
+			}else{
+				printf("\tSem jogadas validas :(");
+				semJogadaValida++;		
+				if(semJogadaValida > 1){
+					fimDeJogo = TRUE;
+				}
+			}
+			quemJogaAgora = IA;
 
-	tabJogo[0][3] = -1;
-	tabJogo[1][3] = 1;
-	tabJogo[2][3] = 1;
-	tabJogo[3][3] = 1;
-	//tabJogo[4][3] = 1;
-	tabJogo[5][3] = 1;
-	tabJogo[4][3] = 1;
-	//tabJogo[6][3] = 1;
+			printaTabuleiro(tabJogo);
+		}
+		if(quemJogaAgora == IA){
+			escolhejogada(tabJogo, corIA, &linhaMuda, &colMuda);
 
-	tabJogo[7][6] = -1;
-	tabJogo[2][7] = -1;
+			if(linhaMuda != -1 && colMuda != -1){
+				printf("\n\tJogada da IA:\n\t\tLinhas: %d\n\t\tColuna: %d\n", linhaMuda, colMuda);
+				joga(tabJogo, corIA, linhaMuda, colMuda);
+				printaTabuleiro(tabJogo);
+			}else{
+				printf("\tSem jogadas validas para a IA");
+				semJogadaValida++;		
+				if(semJogadaValida > 1){
+					fimDeJogo = TRUE;
+				}
+			}
 
-	//tabJogo[5][6] = 1;
+			quemJogaAgora = JOGADOR;
+		}
+		printf("\t_______________________________________\n\n\n");
+		contadorRodadas += 1;
 
-	tabJogo[2][1] = 1;
-	tabJogo[3][2] = 1;
-	//tabJogo[5][5] = 1;
+		pontosBranco = 0;
+		pontosPreta = 0;
 
-	tabJogo[4][5] = 1;
-	tabJogo[3][6] = 1;
+		for(int q = 0; q < 8; q++){
+			for (int w = 0; w < 8; w++){
+				//Contando os pontos
+				if(tabJogo[q][w] != 0){
+					if(tabJogo[q][w] == 1)
+						pontosBranco += 1;
+					else if(tabJogo[q][w] == -1)
+						pontosPreta += 1;
+				}
+			}	
+		}
+	}
 
-	tabJogo[5][0] = -1;
-
-	tabJogo[5][1] = 1;
-	tabJogo[5][2] = 1;
-	//tabJogo[5][5] = 1;
-
-	//tabJogo[2][7] = 1;
-	tabJogo[5][4] = 1;*/
-
-	escolhejogada(tabJogo, corIA, &linhaMuda, &colMuda);
-
-	printaTabuleiro(tabJogo);
-	printf("\n\nLinha: %d\nColuna: %d\n\n", linhaMuda, colMuda);
-
+	if(pontosBranco > pontosPreta)
+		printf("\n\tVitoria das pecas Pretas!");
+	else if(pontosBranco < pontosPreta)
+		printf("\n\tVitoria das pecas Brancas!");
+	else
+		printf("\n\tEmpate!");
 	return 0;
 }
