@@ -1,20 +1,27 @@
 #include <stdio.h>
 
+#define MAX 10
+
+void bubbleSort(int vector[]){
+
+	while(){
+		for(int aBS = 0; aBS < MAX; aBS++){
+			if(vector[aBS] > vector[aBS + 1])
+				vector[aBS] = vector[aBS + 1];
+
+		}
+	}
+}
+
+//Exemplo
+
 int main(){
-	int v[8][8];
+	int a[10] = {9, 5, 6, 3, 7, 8, 2, 1, 4, 5};
 
-	for(int a = 0; a < 8; a++){
-		for(int b = 0; b < 8; b++){
-			v[a][b] = 0;
-		}
-	}
-	v[0][2] = 2;
+	bubbleSort(a);
 
-	for(int a = 0; a < 8; a++){
-		for(int b = 0; b < 8; b++){
-			printf("v[%d][%d] = %d\n", a, b, v[a][b]);
-		}
+	for (int i = 0; i < MAX; i++){
+		printf("%d\n", a[i]);
 	}
 
-	return 0;
 }
