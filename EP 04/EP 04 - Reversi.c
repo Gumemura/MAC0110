@@ -862,7 +862,7 @@ void joga(int tabuleiro[8][8], int cor, int l, int c){
 int main(){
 	int tabJogo[8][8], linhaMuda = 0, colMuda = 0;
 
-	int corJogador, corIA, contadorRodadas = 1, quemJogaAgora, semJogadaValida = 0, fimDeJogo = FALSE;
+	int corJogador, corIA, contadorRodadas = 1, quemJogaAgora, semJogadaValida = 0, rodJIIA = 0, rodJIPJ = 0, fimDeJogo = FALSE;
 
 	int linhaJogada, colJogada;
 	int lVstj, cVstj;
@@ -899,7 +899,7 @@ int main(){
 	if(corJogador == -1)
 		printf("\n\nVamos comecar! Como voce escolheu as pretas, voce comeca");
 	else
-		printf("\n\nVamos comecar! Como o computador joga com as pecas pretas, ele começa!");
+		printf("\n\nVamos comecar! Como o computador joga com as pecas pretas, ele comeca!");
 
 	printf("\nObs.: No tabuleiro, as pecas brancas sao representadas por 'O', e as pretas por 'X'\n\n");
 
@@ -907,57 +907,11 @@ int main(){
 
 	if(-1 == corJogador){
 		quemJogaAgora = JOGADOR;
-		printaTabuleiro(tabJogo);
+		//printaTabuleiro(tabJogo);
 	}else
 		quemJogaAgora = IA;
 
 	while(fimDeJogo == FALSE){
-		printf("\t############## RODADA %d ###############\n", contadorRodadas);
-		printf("\t    PRETAS: %d               BRANCAS: %d\n\n", pontosPreta, pontosBranco);
-		if(quemJogaAgora == JOGADOR){
-			escolhejogada(tabJogo, corJogador, &lVstj, &cVstj);
-
-			if(lVstj != -1 && cVstj != -1){
-				printf("\tInsira as coordenadas da sua jogada (linha e coluna, respectivamente): ");
-				scanf("%d %d", &linhaJogada, &colJogada);
-
-				if(podejogar(tabJogo, corJogador, linhaJogada, colJogada) == 0/*jogada invalida*/){
-					printf("\nJOGADA INVALIDA PERDEU\n");
-					fimDeJogo = TRUE;
-				}else{
-					joga(tabJogo, corJogador, linhaJogada, colJogada);
-				}
-			}else{
-				printf("\tSem jogadas validas :(");
-				semJogadaValida++;		
-				if(semJogadaValida > 1){
-					fimDeJogo = TRUE;
-				}
-			}
-			quemJogaAgora = IA;
-
-			printaTabuleiro(tabJogo);
-		}
-		if(quemJogaAgora == IA){
-			escolhejogada(tabJogo, corIA, &linhaMuda, &colMuda);
-
-			if(linhaMuda != -1 && colMuda != -1){
-				printf("\n\tJogada da IA:\n\t\tLinhas: %d\n\t\tColuna: %d\n", linhaMuda, colMuda);
-				joga(tabJogo, corIA, linhaMuda, colMuda);
-				printaTabuleiro(tabJogo);
-			}else{
-				printf("\tSem jogadas validas para a IA");
-				semJogadaValida++;		
-				if(semJogadaValida > 1){
-					fimDeJogo = TRUE;
-				}
-			}
-
-			quemJogaAgora = JOGADOR;
-		}
-		printf("\t_______________________________________\n\n\n");
-		contadorRodadas += 1;
-
 		pontosBranco = 0;
 		pontosPreta = 0;
 
@@ -972,12 +926,63 @@ int main(){
 				}
 			}	
 		}
+
+		printf("\t############## RODADA %d ###############\n", contadorRodadas);
+		printf("\t   PRETAS: %d               BRANCAS: %d\n\n", pontosPreta, pontosBranco);
+
+		printaTabuleiro(tabJogo);
+
+		if(quemJogaAgora == JOGADOR){
+			escolhejogada(tabJogo, corJogador, &lVstj, &cVstj);
+
+			if(lVstj != -1 && cVstj != -1){
+				printf("\tInsira as coordenadas da sua jogada separadas por expaco (linha e coluna, respectivamente): ");
+				scanf("%d %d", &linhaJogada, &colJogada);
+
+				if(podejogar(tabJogo, corJogador, linhaJogada, colJogada) == 0/*jogada invalida*/){
+					printf("\n\tJOGADA INVALIDA!! VOCE PERDEU :(\n");
+					if(corJogador == -1)
+						pontosBranco = 100;
+					else
+						pontosPreta = 100;
+					fimDeJogo = TRUE;
+				}else{
+					joga(tabJogo, corJogador, linhaJogada, colJogada);
+				}
+			}else{
+				printf("\tSem jogadas validas :(\n");
+				rodJIPJ = contadorRodadas;	
+			}
+			quemJogaAgora = IA;
+		}else if(quemJogaAgora == IA){
+			escolhejogada(tabJogo, corIA, &linhaMuda, &colMuda);
+
+			if(linhaMuda != -1 && colMuda != -1){
+				printf("\t\t     Jogada da IA:\n\t   Linhas: %d               Coluna: %d\n", linhaMuda, colMuda);
+				joga(tabJogo, corIA, linhaMuda, colMuda);
+			}else{
+				printf("\tSem jogadas validas para a IA\n");
+				rodJIIA = contadorRodadas;
+			}
+
+			quemJogaAgora = JOGADOR;
+		}
+
+		if(rodJIPJ != 0 && rodJIIA != 0){
+			if(rodJIPJ + rodJIIA == (contadorRodadas * 2) - 1){
+				fimDeJogo = TRUE;
+			}
+		}
+
+
+		printf("\t_______________________________________\n\n\n");
+		contadorRodadas += 1;
 	}
 
 	if(pontosBranco > pontosPreta)
-		printf("\n\tVitoria das pecas Pretas!");
+		printf("\n\tVitoria das pecas Brancas!\n");
 	else if(pontosBranco < pontosPreta)
-		printf("\n\tVitoria das pecas Brancas!");
+		printf("\n\tVitoria das pecas Pretas!\n");
 	else
 		printf("\n\tEmpate!");
 	return 0;
