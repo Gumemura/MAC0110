@@ -6,7 +6,7 @@ int main(){
 	int boleano;
 
 	if(boleano == FALSE)
-		printf("\nVerdadeiro!");
+		printf("\nVerdadeiro!"); //testeee
 }
 
 
