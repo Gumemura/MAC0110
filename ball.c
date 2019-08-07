@@ -6,9 +6,9 @@
 int main() {
  int gd = DETECT, gm;
  int i, x, y, flag=0;
- initgraph(&gd, &gm, "C:\\TC\\BGI");
+ initgraph(&gd, &gm, "C:\\TC\\BGI"); 
  
- /* get mid positions in x and y-axis */
+ /* get mid positions in x and y-axis s*/
  x = getmaxx()/2;
  y = 30;
  
